@@ -14,6 +14,9 @@ Hiçbir Python veya kütüphane kurulumu ile uğraşmadan doğrudan çalıştır
 👉 **[📦 AnimeHaber-v1.0.0-Windows.zip İndir (Son Sürüm)](https://github.com/KaranlikPasa/anime-haber/releases/latest)**
 
 > **Kurulum:** İndirdiğiniz `.zip` dosyasını bir klasöre çıkartın ve içindeki `AnimeHaber.exe` dosyasına çift tıklayarak çalıştırın!
+> 
+> 💡 *Not: Windows SmartScreen mavi uyarı ekranı ("Windows kişisel bilgisayarınızı korudu") gösterirse:*
+> Sol taraftaki **"Ek bilgi"** bağlantısına tıklayıp **"Yine de çalıştır"** butonuna basmanız yeterlidir. (Yıllık kurumsal kod imzalama sertifikası bulunmayan tüm bağımsız açık kaynaklı uygulamalarda Windows ilk açılışta bunu gösterir; virüs değildir, tek seferlik izin vermeniz yeterlidir).*
 
 ---
 
