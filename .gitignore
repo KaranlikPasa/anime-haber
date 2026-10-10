@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Uygulama Günlükleri ve Geçici Dosyalar
+*.log
+anime_haber.log
+history.json
+
+# Windows Sistem Dosyaları
+Thumbs.db
+Desktop.ini
+*.lnk

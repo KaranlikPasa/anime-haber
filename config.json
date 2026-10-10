@@ -1,0 +1,21 @@
+{
+  "check_interval_minutes": 5,
+  "enable_desktop_notifications": true,
+  "enable_sound_alerts": true,
+  "enable_discord": false,
+  "discord_webhook_url": "",
+  "close_to_tray": true,
+  "start_minimized": false,
+  "auto_open_magnet": false,
+  "anime_list": [
+    {
+      "id": "6aa52334",
+      "name": "magical",
+      "alias": "",
+      "quality": "1080p",
+      "group": "",
+      "category": "1_2",
+      "is_active": true
+    }
+  ]
+}
