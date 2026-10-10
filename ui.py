@@ -272,13 +272,13 @@ class AnimeHaberUI(ctk.CTk):
 
         torrent_btn = ctk.CTkButton(
             bottom_row,
-            text="📥 .torrent",
+            text="📥 İndir (.torrent)",
             fg_color="#0284c7",
             hover_color="#0369a1",
-            width=80,
+            width=110,
             height=28,
-            font=ctk.CTkFont(size=11),
-            command=lambda t=rel.get("torrent_url"): self.open_url(t)
+            font=ctk.CTkFont(size=11, weight="bold"),
+            command=lambda u=rel.get("torrent_url"), t=rel.get("title", ""): self.action_download_torrent(u, t)
         )
         torrent_btn.pack(side="right", padx=3)
 
@@ -717,13 +717,13 @@ class AnimeHaberUI(ctk.CTk):
 
         torrent_btn = ctk.CTkButton(
             btn_box,
-            text="📥 .torrent",
+            text="📥 İndir (.torrent)",
             fg_color="#0284c7",
             hover_color="#0369a1",
-            width=75,
+            width=105,
             height=26,
-            font=ctk.CTkFont(size=11),
-            command=lambda t=rel.get("torrent_url"): self.open_url(t)
+            font=ctk.CTkFont(size=11, weight="bold"),
+            command=lambda u=rel.get("torrent_url"), t=rel.get("title", ""): self.action_download_torrent(u, t)
         )
         torrent_btn.pack(side="right", padx=3)
 
@@ -789,6 +789,27 @@ class AnimeHaberUI(ctk.CTk):
         if settings.get("auto_open_magnet", False):
             self.sw_auto_magnet.select()
         self.sw_auto_magnet.pack(anchor="w", pady=4)
+
+        self.sw_auto_download = ctk.CTkSwitch(
+            settings_frame,
+            text="Yeni bölüm gelince .torrent dosyasını otomatik bilgisayara indir ve başlat",
+            progress_color="#00b4d8"
+        )
+        if settings.get("auto_download_torrent", False):
+            self.sw_auto_download.select()
+        self.sw_auto_download.pack(anchor="w", pady=4)
+
+        btn_open_torrents = ctk.CTkButton(
+            settings_frame,
+            text="📁 İndirilen Torrentler Klasörünü Aç",
+            fg_color="#334155",
+            hover_color="#475569",
+            width=260,
+            height=32,
+            font=ctk.CTkFont(size=12),
+            command=self.action_open_torrent_dir
+        )
+        btn_open_torrents.pack(anchor="w", pady=(6, 4))
 
         self.sw_close_tray = ctk.CTkSwitch(
             settings_frame,
@@ -877,7 +898,8 @@ class AnimeHaberUI(ctk.CTk):
             "enable_discord": bool(self.sw_discord.get()),
             "discord_webhook_url": self.entry_webhook.get().strip(),
             "close_to_tray": bool(self.sw_close_tray.get()),
-            "auto_open_magnet": bool(self.sw_auto_magnet.get())
+            "auto_open_magnet": bool(self.sw_auto_magnet.get()),
+            "auto_download_torrent": bool(self.sw_auto_download.get())
         }
 
         self.config_manager.update_settings(new_settings)
@@ -964,6 +986,28 @@ class AnimeHaberUI(ctk.CTk):
         self.clipboard_clear()
         self.clipboard_append(text)
         messagebox.showinfo("Kopyalandı", "Başlık panoya kopyalandı!")
+
+    def action_download_torrent(self, torrent_url: str, title: str):
+        if not torrent_url:
+            messagebox.showwarning("Uyarı", "Bu yükleme için torrent indirme bağlantısı bulunamadı.")
+            return
+
+        def _do_download():
+            path = self.tracker.download_torrent_file(torrent_url, title, open_after=True)
+            if path:
+                fname = os.path.basename(path)
+                self.after(0, lambda: messagebox.showinfo("Torrent İndirildi", f"✅ .torrent dosyası başarıyla indirildi ve torrent istemcinizde açıldı!\n\nDosya: {fname}\nKonum: {os.path.dirname(path)}"))
+            else:
+                self.after(0, lambda: messagebox.showerror("Hata", "Torrent dosyası indirilemedi. Nyaa bağlantısını kontrol edin."))
+
+        threading.Thread(target=_do_download, daemon=True).start()
+
+    def action_open_torrent_dir(self):
+        d = self.config_manager.get_torrent_dir()
+        try:
+            os.startfile(d)
+        except Exception:
+            webbrowser.open(f"file:///{d}")
 
     # -------------------------------------------------------------
     # Pencere Gizleme / Gösterme & Çıkış

@@ -17,3 +17,11 @@ history.json
 Thumbs.db
 Desktop.ini
 *.lnk
+
+# PyInstaller & Paketler
+build/
+dist/
+*.spec
+*.zip
+torrentler/
+

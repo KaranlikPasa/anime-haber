@@ -18,6 +18,7 @@ DEFAULT_CONFIG = {
     "close_to_tray": True,
     "start_minimized": False,
     "auto_open_magnet": False,
+    "auto_download_torrent": False,
     "anime_list": []
 }
 
@@ -122,7 +123,13 @@ class ConfigManager:
             "close_to_tray": self.config.get("close_to_tray", True),
             "start_minimized": self.config.get("start_minimized", False),
             "auto_open_magnet": self.config.get("auto_open_magnet", False),
+            "auto_download_torrent": self.config.get("auto_download_torrent", False),
         }
+
+    def get_torrent_dir(self) -> str:
+        d = os.path.join(self.base_dir, "torrentler")
+        os.makedirs(d, exist_ok=True)
+        return d
 
     def update_settings(self, new_settings: Dict[str, Any]):
         for k, v in new_settings.items():

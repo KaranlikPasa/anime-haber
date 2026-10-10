@@ -150,6 +150,13 @@ class NyaaTracker:
                                 except Exception:
                                     pass
 
+                    # Otomatik torrent indirme seçeneği
+                    if self.config_manager.get_settings().get("auto_download_torrent", False):
+                        for n_item in new_releases_this_batch:
+                            t_url = n_item.get("torrent_url")
+                            if t_url:
+                                self.download_torrent_file(t_url, n_item.get("title", "anime"), open_after=True)
+
                 # Nyaa sunucusuna saygı için sorgular arası kısa mola
                 time.sleep(1.0)
 
@@ -307,3 +314,34 @@ class NyaaTracker:
         if elem is not None and elem.text:
             return elem.text.strip()
         return ""
+
+    def download_torrent_file(self, torrent_url: str, title: str, open_after: bool = True) -> Optional[str]:
+        """Nyaa.si üzerinden .torrent dosyasını doğrudan indirir ve isteğe bağlı qBittorrent/istemcide açar."""
+        if not torrent_url:
+            return None
+        try:
+            dest_dir = self.config_manager.get_torrent_dir()
+            safe_title = "".join(c for c in title if c not in r'\/:*?"<>|').strip()[:90]
+            if not safe_title:
+                safe_title = "anime_torrent"
+            filename = f"{safe_title}.torrent"
+            file_path = os.path.join(dest_dir, filename)
+
+            req = urllib.request.Request(
+                torrent_url,
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AnimeHaber/1.0"}
+            )
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                with open(file_path, "wb") as f:
+                    f.write(resp.read())
+
+            if open_after:
+                try:
+                    os.startfile(file_path)
+                except Exception:
+                    pass
+            return file_path
+        except Exception as e:
+            print(f"[NyaaTracker] Torrent indirme hatası: {e}")
+            return None
+

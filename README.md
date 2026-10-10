@@ -1,6 +1,19 @@
 # 📺 Anime Haber • Nyaa.si Anime Çeviri & Bölüm Takipçisi
 
-Anime çevirmenleri ve fansub ekipleri için özel olarak geliştirilmiş, **Nyaa.si** üzerindeki yeni bölüm yüklemelerini arka planda otomatik olarak takip eden, bildiren ve tek tıkla indirme imkanı sunan masaüstü uygulaması.
+[![GitHub Release](https://img.shields.io/github/v/release/KaranlikPasa/anime-haber?style=for-the-badge&color=00b4d8)](https://github.com/KaranlikPasa/anime-haber/releases/latest)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-blue?style=for-the-badge)](https://github.com/KaranlikPasa/anime-haber/releases/latest)
+
+Anime çevirmenleri ve fansub ekipleri için özel olarak geliştirilmiş, **Nyaa.si** üzerindeki yeni bölüm yüklemelerini arka planda otomatik takip eden, bildiren ve tek tıkla doğrudan bilgisayara indiren masaüstü uygulaması.
+
+---
+
+## ⬇️ İndirme (Download)
+
+Hiçbir Python veya kütüphane kurulumu ile uğraşmadan doğrudan çalıştırmak için hazır Windows paketini indirebilirsiniz:
+
+👉 **[📦 AnimeHaber-v1.0.0-Windows.zip İndir (Son Sürüm)](https://github.com/KaranlikPasa/anime-haber/releases/latest)**
+
+> **Kurulum:** İndirdiğiniz `.zip` dosyasını bir klasöre çıkartın ve içindeki `AnimeHaber.exe` dosyasına çift tıklayarak çalıştırın!
 
 ---
 
@@ -17,38 +30,26 @@ Anime çevirmenleri ve fansub ekipleri için özel olarak geliştirilmiş, **Nya
    - 🔊 **Sesli Uyarı (Chime):** Bilgisayarda başka işle uğraşırken veya anime izlerken anında duymanız için ses çalar.
    - 💬 **Discord Webhook Entegrasyonu (Fansub Ekipleri İçin):** Çeviri ekibinizin Discord sunucusundaki kanala otomatik olarak şık bir duyuru mesajı yollar (Boyut, Seed/Leech, Magnet ve Nyaa linkleri dahil).
 
-3. **Hızlı İndirme & Magnet Desteği:**
-   - 🧲 **Tek Tıkla Magnet Aç:** qBittorrent, uTorrent vb. torrent istemcinizde doğrudan indirmeyi başlatır.
-   - 📥 **.torrent İndir:** Torrent dosyasını doğrudan çeker.
-   - 🌐 **Nyaa Sayfası:** Tek tıkla tarayıcıda ilgili torrent sayfasını açar.
-   - ⚡ **Otomatik Magnet:** Ayarlardan açılırsa yeni bölüm gelir gelmez torrent istemcinizi otomatik açabilir.
+3. **📥 Doğrudan İndirme & Otomatik İndirme Motoru:**
+   - 📥 **Doğrudan .torrent İndir:** Tarayıcı açmadan doğrudan `torrentler/` klasörüne indirir ve torrent istemcinizde (qBittorrent vb.) anında başlatır.
+   - 🧲 **Tek Tıkla Magnet Aç:** Torrent programınızda indirmeyi hemen başlatır.
+   - ⚡ **Otomatik İndirme (Auto-Download):** Ayarlardan aktif edildiğinde, yeni bölüm tespit edilir edilmez dosyayı otomatik bilgisayara indirip torrent programında başlatır!
+   - 📁 **İndirilenleri Görüntüle:** Arayüzden tek tıkla indirilen torrent dosyalarının bulunduğu klasörü açabilirsiniz.
 
 4. **Nyaa Canlı Arama:**
-   - Tarayıcı açmadan doğrudan uygulama içinden Nyaa.si'de arama yapabilir, çıkan sonuçlardan tek tıkla animeyi takip listenize ekleyebilirsiniz.
+   - Tarayıcı açmadan doğrudan uygulama içinden Nyaa.si'de arama yapabilir, çıkan sonuçlardan tek tıkla animeyi takip listenize ekleyebilir veya indirebilirsiniz.
 
 5. **Sistem Tepsisi (System Tray) & Arka Plan:**
    - Pencereyi kapattığınızda sistem saatinin yanına (tepsiye) küçülür ve arka planda takip etmeye devam eder.
 
-6. **Mükerrer Önleme:**
-   - `infoHash` tabanlı kontrol sayesinde daha önce görülen bölümler için asla gereksiz bildirim almazsınız.
+6. **Mükerrer & Kilitlenme Koruması:**
+   - Eski bölümleri sessizce hafızaya alır, açılışta gereksiz yüzlerce bildirim fırlatmaz.
+   - Sadece siz ekledikten sonra yüklenen bölümleri bildirir.
 
 ---
 
-## 🛠️ Nasıl Çalıştırılır?
+## 🛠️ Kaynak Koddan Çalıştırma
 
-Klasör içindeki dosyalar:
-- **`baslat.bat`**: Çift tıklayarak uygulamayı başlatabilirsiniz. Gerekli kütüphaneleri otomatik kontrol eder ve açar.
-- **`arkaplanda_baslat.vbs`**: Konsol (siyah CMD penceresi) olmadan doğrudan sessizce başlatmak için çift tıklayın.
-- **`Masaustune_Kisayol_Olustur.ps1`**: Sağ tıklayıp "PowerShell ile Çalıştır" derseniz Masaüstünüze `Anime Haber` kısayolu ekler.
-
----
-
-## ⚙️ Yapılandırma ve Dosyalar
-
-- `config.json`: Takip edilen animeler ve genel ayarlarınızı saklar.
-- `history.json`: Tespit edilen bölümlerin geçmişini ve mükerrer engelleme hash'lerini saklar.
-- `main.py`: Ana başlatıcı.
-- `ui.py`: CustomTkinter grafik arayüzü.
-- `tracker.py`: Nyaa.si RSS veri çekici ve filtreleme motoru.
-- `notifier.py`: Windows bildirimleri ve Discord Webhook yöneticisi.
-- `tray.py`: Sistem tepsisi simge yöneticisi.
+Eğer projeyi kaynak kodundan çalıştırmak isterseniz:
+- **`baslat.bat`**: Çift tıklayarak Python ortamıyla başlatabilirsiniz.
+- **`arkaplanda_baslat.vbs`**: Konsol penceresi olmadan doğrudan sessizce başlatır.
