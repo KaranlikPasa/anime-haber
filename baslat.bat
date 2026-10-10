@@ -18,13 +18,20 @@ if %ERRORLEVEL% neq 0 (
     ) else if exist "py" (
         set "PYTHON_CMD=py"
     ) else (
-        echo [HATA] Python bulunamadi! Lutfen Python'un kurulu oldugundan emin olun.
-        pause
-        exit /b 1
+        echo [BILGI] Bilgisayarinizda Python bulunamadi.
+        echo [BILGI] Python 3.12 otomatik olarak kuruluyor, lutfen bekleyin...
+        winget install Python.Python.3.12 --scope user --accept-package-agreements --accept-source-agreements --silent
+        if exist "%LOCALAPPDATA%\Programs\Python\Python312\python.exe" (
+            set "PYTHON_CMD=%LOCALAPPDATA%\Programs\Python\Python312\python.exe"
+        ) else (
+            echo [UYARI] Otomatik kurulum tamamlanamadi. Lutfen https://python.org adresinden Python kurun.
+            pause
+            exit /b 1
+        )
     )
 )
 
-echo [1/2] Moduller dogrulaniyor...
+echo [1/2] Gerekli kutuphaneler kontrol ediliyor...
 "%PYTHON_CMD%" -m pip install -r requirements.txt --quiet --no-warn-script-location
 
 echo [2/2] Anime Haber baslatiliyor...
