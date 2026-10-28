@@ -1,22 +1,44 @@
 # 📺 Anime Haber • Nyaa.si Anime Çeviri & Bölüm Takipçisi
 
+[![Arch Linux](https://img.shields.io/badge/Arch%20Linux-AUR%20%7C%20PKGBUILD-1793d1?style=for-the-badge&logo=arch-linux&logoColor=white)](https://github.com/KaranlikPasa/anime-haber)
+[![Platform](https://img.shields.io/badge/Platform-Arch%20Linux%20%7C%20Windows-blue?style=for-the-badge)](https://github.com/KaranlikPasa/anime-haber)
 [![GitHub Release](https://img.shields.io/github/v/release/KaranlikPasa/anime-haber?style=for-the-badge&color=00b4d8)](https://github.com/KaranlikPasa/anime-haber/releases/latest)
-[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-blue?style=for-the-badge)](https://github.com/KaranlikPasa/anime-haber/releases/latest)
 
-Anime çevirmenleri ve fansub ekipleri için özel olarak geliştirilmiş, **Nyaa.si** üzerindeki yeni bölüm yüklemelerini arka planda otomatik takip eden, bildiren ve tek tıkla doğrudan bilgisayara indiren masaüstü uygulaması.
+Anime çevirmenleri ve fansub ekipleri için özel olarak geliştirilmiş, **Nyaa.si** üzerindeki yeni bölüm yüklemelerini arka planda otomatik takip eden, bildiren ve tek tıkla doğrudan bilgisayara indiren masaüstü uygulaması. **Arch Linux** ve **Windows** üzerinde tam uyumludur.
 
 ---
 
-## ⬇️ İndirme (Download)
+## 📥 Kurulum
 
-Hiçbir Python veya kütüphane kurulumu ile uğraşmadan doğrudan çalıştırmak için hazır Windows paketini indirebilirsiniz:
+### 🐧 1. Arch Linux Kurulumu
+
+#### Yöntem A: PKGBUILD ile Kurulum
+```bash
+git clone https://github.com/KaranlikPasa/anime-haber.git
+cd anime-haber
+makepkg -si
+```
+
+#### Yöntem B: Tek Komutla Kurulum Betiği (`install.sh`)
+```bash
+git clone https://github.com/KaranlikPasa/anime-haber.git
+cd anime-haber
+chmod +x install.sh
+sudo ./install.sh
+```
+
+Kurulumdan sonra uygulama menünüzden **Anime Haber**'i seçebilir veya terminalde doğrudan çalıştırabilirsiniz:
+```bash
+anime-haber
+```
+
+---
+
+### 🪟 2. Windows Kurulumu
 
 👉 **[📦 AnimeHaber-v1.0.0-Windows.zip İndir (Son Sürüm)](https://github.com/KaranlikPasa/anime-haber/releases/latest)**
 
 > **Kurulum:** İndirdiğiniz `.zip` dosyasını bir klasöre çıkartın ve içindeki `AnimeHaber.exe` dosyasına çift tıklayarak çalıştırın!
-> 
-> 💡 *Not: Windows SmartScreen mavi uyarı ekranı ("Windows kişisel bilgisayarınızı korudu") gösterirse:*
-> Sol taraftaki **"Ek bilgi"** bağlantısına tıklayıp **"Yine de çalıştır"** butonuna basmanız yeterlidir. (Yıllık kurumsal kod imzalama sertifikası bulunmayan tüm bağımsız açık kaynaklı uygulamalarda Windows ilk açılışta bunu gösterir; virüs değildir, tek seferlik izin vermeniz yeterlidir).*
 
 ---
 
@@ -29,7 +51,7 @@ Hiçbir Python veya kütüphane kurulumu ile uğraşmadan doğrudan çalıştır
    - **Kategori Filtresi** (İngilizce Altyazılı `1_2`, Ham/Raw `1_4`, Tüm Anime `1_0`).
 
 2. **Gelişmiş Bildirimler:**
-   - 🔔 **Windows 10/11 Masaüstü Bildirimi:** Yeni bölüm düştüğü an ekranın sağ alt köşesinde başlık, boyut ve seed sayısı ile toast bildirimi açılır.
+   - 🔔 **Masaüstü Bildirimi:** Linux'ta `notify-send` ile entegre native toast bildirimleri; Windows'ta native toast bildirimi.
    - 🔊 **Sesli Uyarı (Chime):** Bilgisayarda başka işle uğraşırken veya anime izlerken anında duymanız için ses çalar.
    - 💬 **Discord Webhook Entegrasyonu (Fansub Ekipleri İçin):** Çeviri ekibinizin Discord sunucusundaki kanala otomatik olarak şık bir duyuru mesajı yollar (Boyut, Seed/Leech, Magnet ve Nyaa linkleri dahil).
 
@@ -45,14 +67,16 @@ Hiçbir Python veya kütüphane kurulumu ile uğraşmadan doğrudan çalıştır
 5. **Sistem Tepsisi (System Tray) & Arka Plan:**
    - Pencereyi kapattığınızda sistem saatinin yanına (tepsiye) küçülür ve arka planda takip etmeye devam eder.
 
-6. **Mükerrer & Kilitlenme Koruması:**
-   - Eski bölümleri sessizce hafızaya alır, açılışta gereksiz yüzlerce bildirim fırlatmaz.
-   - Sadece siz ekledikten sonra yüklenen bölümleri bildirir.
-
 ---
 
 ## 🛠️ Kaynak Koddan Çalıştırma
 
-Eğer projeyi kaynak kodundan çalıştırmak isterseniz:
-- **`baslat.bat`**: Çift tıklayarak Python ortamıyla başlatabilirsiniz.
-- **`arkaplanda_baslat.vbs`**: Konsol penceresi olmadan doğrudan sessizce başlatır.
+```bash
+pip install -r requirements.txt
+python main.py
+```
+
+---
+
+## 📄 Lisans
+MIT License

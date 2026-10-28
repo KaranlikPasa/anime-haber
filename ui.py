@@ -1,3 +1,4 @@
+from os_utils import open_path_or_url
 # -*- coding: utf-8 -*-
 """
 Anime Haber - Nyaa.si Takipçisi
@@ -974,7 +975,7 @@ class AnimeHaberUI(ctk.CTk):
             messagebox.showwarning("Uyarı", "Bu yükleme için magnet linki bulunamadı.")
             return
         try:
-            os.startfile(magnet_link)
+            open_path_or_url(magnet_link)
         except Exception as e:
             webbrowser.open(magnet_link)
 
@@ -1005,7 +1006,7 @@ class AnimeHaberUI(ctk.CTk):
     def action_open_torrent_dir(self):
         d = self.config_manager.get_torrent_dir()
         try:
-            os.startfile(d)
+            open_path_or_url(d)
         except Exception:
             webbrowser.open(f"file:///{d}")
 

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Anime Haber
+Name[tr]=Anime Haber
+Comment=Nyaa.si Anime Çeviri & Bölüm Takipçisi
+Comment[tr]=Nyaa.si Anime Çeviri & Bölüm Takipçisi
+Exec=/opt/anime-haber/anime-haber %u
+Icon=anime-haber
+Terminal=false
+Type=Application
+Categories=Network;FileTransfer;Utility;
+Keywords=anime;nyaa;haber;tracker;torrent;fansub;bildirim;
+StartupNotify=true

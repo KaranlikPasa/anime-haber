@@ -75,9 +75,22 @@ class Notifier:
 
         def _send():
             with self._notification_lock:
+                if sys.platform != "win32":
+                    try:
+                        import shutil, subprocess
+                        if shutil.which("notify-send"):
+                            cmd = ["notify-send", "-a", "Anime Haber", "-u", "normal"]
+                            icon_p = os.path.join(os.path.dirname(__file__), "icon.png")
+                            if os.path.exists(icon_p):
+                                cmd.extend(["-i", icon_p])
+                            cmd.extend([title, body])
+                            subprocess.Popen(cmd)
+                            return
+                    except Exception as e:
+                        print(f"[Notifier] notify-send error: {e}")
+
                 try:
                     if win11toast:
-                        # win11toast.notify ASYNC/WAIT YAPMAZ, doğrudan Windows Shell'e iletir
                         win11toast.notify(
                             title=title,
                             body=body,

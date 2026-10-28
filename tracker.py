@@ -1,3 +1,4 @@
+from os_utils import open_path_or_url
 # -*- coding: utf-8 -*-
 """
 Anime Haber - Nyaa.si Takipçisi
@@ -146,7 +147,7 @@ class NyaaTracker:
                             magnet = n_item.get("magnet_link")
                             if magnet:
                                 try:
-                                    os.startfile(magnet)
+                                    open_path_or_url(magnet)
                                 except Exception:
                                     pass
 
@@ -337,7 +338,7 @@ class NyaaTracker:
 
             if open_after:
                 try:
-                    os.startfile(file_path)
+                    open_path_or_url(file_path)
                 except Exception:
                     pass
             return file_path
